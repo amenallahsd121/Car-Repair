@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contactez-nous
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-lg-8">
+				<div class="p-5 rounded-lg bg-white" style="padding: 40px; border-radius: 20px;">
+					<h1 class="text-center mb-4">Contactez-nous</h1>
+					<form
+						method="post">
+						{{ form_errors(form) }}
+
+						<div class="row g-3">
+							<div class="col-12">
+								{{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'form-label'}}) }}
+								{{ form_widget(form.nom, {'attr': {'class': 'form-control', 'style': 'border-radius: 10px;'}}) }}
+							</div>
+							<div class="col-12">
+								{{ form_label(form.prenom, 'Prénom', {'label_attr': {'class': 'form-label'}}) }}
+								{{ form_widget(form.prenom, {'attr': {'class': 'form-control', 'style': 'border-radius: 10px;'}}) }}
+							</div>
+							<div class="col-12">
+								{{ form_label(form.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
+								{{ form_widget(form.email, {'attr': {'class': 'form-control', 'style': 'border-radius: 10px;'}}) }}
+							</div>
+							<div class="col-12">
+								{{ form_label(form.numTel, 'Numéro de téléphone', {'label_attr': {'class': 'form-label'}}) }}
+								{{ form_widget(form.numTel, {'attr': {'class': 'form-control', 'style': 'border-radius: 10px;'}}) }}
+							</div>
+							<div class="col-12">
+								{{ form_label(form.message, 'Message', {'label_attr': {'class': 'form-label'}}) }}
+								{{ form_widget(form.message, {'attr': {'class': 'form-control', 'style': 'border-radius: 10px;'}}) }}
+							</div>
+							<div
+								class="col-12 d-flex justify-content-center">
+								{{ form_widget(form._token) }}
+								<button class="btn btn-primary py-2 px-4" type="submit">Envoyer</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

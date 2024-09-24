@@ -1,0 +1,64 @@
+{% extends 'basebackoffice.html.twig' %}
+
+{% block title %}Créer Horaires d'ouverture{% endblock %}
+
+{% block body %}
+    <style>
+    
+        .form-container {
+            background-color: #fff; 
+            border-radius: 10px; 
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+            padding: 20px;
+        }
+
+        
+        .btn-center {
+            text-align: center; 
+        }
+
+        
+        .form-label {
+            font-size: 18px; 
+        }
+
+        
+        .form-title {
+            text-align: center; 
+            font-size: 24px; 
+            margin-bottom: 30px; 
+            color: #333; 
+        }
+
+   
+        .form-wrapper {
+            margin-top: 50px; 
+        }
+    </style>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6 form-wrapper"> 
+                <form method="post" class="form-container">
+                    <h1 class="form-title">Créer Horaires d'ouverture</h1> 
+                    <div class="mb-3">
+                        {{ form_label(form.Jour, 'Jour :', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.Jour, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.Horaire, 'Horaire ouverture :', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.Horaire, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    {{ form_row(form._token) }}
+                    <div class="mb-3 mt-4 btn-center">
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        {% include 'staticservicelist.html.twig' %}
+    </div>
+{% endblock %}

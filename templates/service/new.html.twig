@@ -1,0 +1,65 @@
+{% extends 'basebackoffice.html.twig' %}
+
+{% block title %}Nouveau Service{% endblock %}
+
+{% block body %}
+<style>
+    /* Custom styles for the form container */
+    .form-container {
+        background-color: #fff; /* White background */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        padding: 15px; /* Reduced padding */
+    }
+
+    /* Custom styles for increasing the size of label text */
+    .form-label {
+        font-size: 18px; /* Increase label font size */
+    }
+    
+    /* Custom styles for the h1 element */
+    .h1-title {
+        font-size: 32px; /* Increase h1 font size */
+        background-color: #fff; /* White background */
+        padding: 10px; /* Add padding */
+        border-radius: 10px; /* Rounded corners */
+        margin-bottom: 20px; /* Add margin bottom */
+        text-align: center; /* Center the h1 */
+    }
+
+    /* Center the button */
+    .btn-center {
+        text-align: center; /* Center align button */
+    }
+</style>
+
+<div class="container-xxl service py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="form-container">
+                    <h1 class="mb-5 h1-title">Créer un nouveau service</h1>
+                    {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': ''}}) }}
+                    <div class="mb-3">
+                        {{ form_label(form.nom, 'Nom du service :', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.nom, {'attr': {'class': 'form-control', }}) }}
+                        {{ form_errors(form.nom) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.description, 'Description du service :', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows': 4}}) }}
+                        {{ form_errors(form.description) }}
+                    </div>
+                    <div class="btn-center"> <!-- Center align button -->
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-5"> <!-- Add margin-top here -->
+        {% include 'staticservicelist.html.twig' %}
+    </div>
+</div>
+{% endblock %}

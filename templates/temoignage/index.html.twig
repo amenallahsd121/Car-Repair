@@ -1,0 +1,51 @@
+{% extends 'basebackoffice.html.twig' %}
+
+{% block title %}Temoignages{% endblock %}
+
+{% block body %}
+    <div class="container-xxl py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Les avis de nos clients</h2>
+            <div class="row g-4">
+                {% for temoignage in temoignages %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="{{ loop.index * 0.2 }}s">
+                        <div class="d-flex py-5 px-4">
+                            <i class="fa fa-quote-left fa-3x text-primary flex-shrink-0"></i>
+                            <div class="ps-4">
+                                <h5 class="mb-3">{{ temoignage.Nom }}</h5>
+                                <p>{{ temoignage.Commentaire }}</p>
+                                <p>Note :
+                                    {% for i in 1..5 %}
+                                        {% if i <= temoignage.Note %}
+                                            <i class="fa fa-star text-warning"></i>
+                                        {% else %}
+                                            <i class="fa fa-star text-secondary"></i>
+                                        {% endif %}
+                                    {% endfor %}
+                                </p>
+                                {% if temoignage.etat == 1 %}
+                                    <p>Etat : Approuvé
+                                        <i class="fa fa-check text-success"></i>
+                                    </p>
+                                    <a href="{{ path('app_temoignage_delete', {'id': temoignage.id}) }}" class="btn btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                {% else %}
+                                    <p>Etat : Non traité
+                                        <i class="fa fa-times text-danger"></i>
+                                    </p>
+                                    <a href="{{ path('app_temoignage_accept', {'id': temoignage.id}) }}" class="btn btn-success">
+                                        <i class="fa fa-check"></i>
+                                    </a>
+                                    <a href="{{ path('app_temoignage_delete', {'id': temoignage.id}) }}" class="btn btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

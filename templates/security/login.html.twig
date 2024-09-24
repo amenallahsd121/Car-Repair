@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<form class="card p-4" method="post" style="border-radius: 10px;">
+					{% if error %}
+						<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+					{% endif %}
+
+					{% if app.user %}
+						<div class="alert alert-success">Vous êtes connecté en tant que
+							{{ app.user.userIdentifier }},
+							<a href="{{ path('app_logout') }}">Déconnexion</a>
+						</div>
+					{% endif %}
+
+					<h1 class="h3 mb-3 font-weight-normal text-center">Veuillez vous connecter</h1>
+					<div class="form-group mb-3">
+						<label for="inputEmail" class="sr-only">Adresse email</label>
+						<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Adresse email" autocomplete="email" required autofocus>
+					</div>
+					<div class="form-group mb-3">
+						<label for="inputPassword" class="sr-only">Mot de passe</label>
+						<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe" autocomplete="current-password" required>
+					</div>
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+					<button class="btn btn-primary btn-sm mx-auto d-block" style="width: 150px;" type="submit">Connexion</button> <!-- Adjusted button size and centered it horizontally -->
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="container-xxl py-5">
+		<div class="container">
+			<div class="row g-5">
+				<div class="col-lg-6 pt-4" style="min-height: 400px;">
+					<div class="position-relative h-100 wow fadeIn" data-wow-delay="0.1s">
+						<img class="position-absolute img-fluid w-100 h-100" src="assets/img/about.jpg" style="object-fit: cover;" alt="">
+						<div class="position-absolute top-0 end-0 mt-n4 me-n4 py-4 px-5" style="background: rgba(0, 0, 0, .08);">
+							<h1 class="display-4 text-white mb-0">15
+								<span class="fs-4">Années</span>
+							</h1>
+							<h4 class="text-white">d'expérience</h4>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<h1 class="mb-4">
+						<span class="text-primary">CarServ</span>
+						Est Le Meilleur Endroit Pour L'Entretien De Votre Auto</h1>
+					<div class="row g-4 mb-3 pb-3">
+						<div class="col-12 wow fadeIn" data-wow-delay="0.1s">
+							<div class="d-flex">
+								<div class="bg-light d-flex flex-shrink-0 align-items-center justify-content-center mt-1" style="width: 45px; height: 45px;">
+									<span class="fw-bold text-secondary">01</span>
+								</div>
+								<div class="ps-3">
+									<h6>Professionnel & Expert</h6>
+									<span>Nous mettons notre savoir-faire à votre service.</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 wow fadeIn" data-wow-delay="0.3s">
+							<div class="d-flex">
+								<div class="bg-light d-flex flex-shrink-0 align-items-center justify-content-center mt-1" style="width: 45px; height: 45px;">
+									<span class="fw-bold text-secondary">02</span>
+								</div>
+								<div class="ps-3">
+									<h6>Centre de Service de Qualité</h6>
+									<span>Votre satisfaction, notre priorité.</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 wow fadeIn" data-wow-delay="0.5s">
+							<div class="d-flex">
+								<div class="bg-light d-flex flex-shrink-0 align-items-center justify-content-center mt-1" style="width: 45px; height: 45px;">
+									<span class="fw-bold text-secondary">03</span>
+								</div>
+								<div class="ps-3">
+									<h6>Travailleurs Primés</h6>
+									<span>Excellence reconnue.</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

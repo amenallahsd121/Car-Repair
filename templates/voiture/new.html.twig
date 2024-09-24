@@ -1,0 +1,41 @@
+{% extends is_granted('IS_AUTHENTICATED_FULLY') ? 'basebackoffice.html.twig' : 'base.html.twig' %}
+
+{% block title %}Ajouter une voiture{% endblock %}
+
+{% block body %}
+    <div id="app" class="container shadow bg-white col-md-6 mt-5" style="border-radius: 10px;">
+        <div class="p-3">
+            <form method="post" action="{{ path('app_voiture_new') }}" enctype="multipart/form-data">
+                <h1 class="text-center mb-4">Ajouter une voiture</h1>
+
+                {{ form_errors(form) }}
+
+                <div class="mb-3 col-md-12">
+                    {{ form_label(form.Titre, 'Titre', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.Titre, {'attr': {'class': 'form-control', 'style': 'border-radius: 10px;'}}) }}
+                </div>
+                <div class="mb-3 col-md-12">
+                    {{ form_label(form.Prix, 'Prix', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.Prix, {'attr': {'class': 'form-control', 'style': 'border-radius: 10px;'}}) }}
+                </div>
+                <div class="mb-3 col-md-12">
+                    {{ form_label(form.AnneeCirculation, 'Année de circulation', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.AnneeCirculation, {'attr': {'class': 'form-control', 'style': 'border-radius: 10px;'}}) }}
+                </div>
+                <div class="mb-3 col-md-12">
+                    {{ form_label(form.Kilometrage, 'Kilométrage', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.Kilometrage, {'attr': {'class': 'form-control', 'style': 'border-radius: 10px;'}}) }}
+                </div>
+                <div class="mb-3 col-md-12">
+                    {{ form_label(form.image, 'Image', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.image, {'attr': {'class': 'form-control', 'style': 'border-radius: 10px;'}}) }}
+                </div>
+                <div class="mb-3 mt-4 col-md-12 d-flex justify-content-center">
+
+                    {{ form_widget(form._token) }}
+                    <button class="btn btn-primary">Ajouter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'basebackoffice.html.twig' %}
+
+{% block title %}Nouveau Service{% endblock %}
+
+{% block body %}
+<style>
+    
+    .form-container {
+        background-color: #fff; 
+        border-radius: 10px; 
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+        padding: 15px; 
+    }
+
+    
+    .form-label {
+        font-size: 18px; 
+    }
+    
+    
+    .h1-title {
+        font-size: 32px; 
+        background-color: #fff; 
+        padding: 10px; 
+        border-radius: 10px; 
+        margin-bottom: 20px; 
+        text-align: center; 
+    }
+
+    
+    .btn-center {
+        text-align: center; 
+    }
+</style>
+
+<div class="container-xxl service py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="form-container">
+                    <h1 class="mb-5 h1-title">Créer un nouveau service</h1>
+                    {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': ''}}) }}
+                    <div class="mb-3">
+                        {{ form_label(form.nom, 'Nom du service :', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.nom, {'attr': {'class': 'form-control', }}) }}
+                        {{ form_errors(form.nom) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.description, 'Description du service :', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows': 4}}) }}
+                        {{ form_errors(form.description) }}
+                    </div>
+                    <div class="btn-center"> 
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-5"> 
+        {% include 'staticservicelist.html.twig' %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends is_granted('IS_AUTHENTICATED_FULLY') ? 'basebackoffice.html.twig' : 'base.html.twig' %}
+
+{% block title %}Détails de la voiture{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="container mt-5">
+        <div class="row bg-white shadow rounded-4 border" style="border-radius: 15px">
+            <div id="carouselExampleControls" class="carousel slide col-md-6 p-0" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for image in voiture.images %}
+                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                        <img src="{{ asset('uploads/voiture/' ~ image.name) }}" class="d-block w-100" alt="{{ voiture.Titre }}" style="object-fit: cover; height: 450px; border-radius: 15px;">
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <section class="col-md-6 my-auto">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 mb-3 text-center">
+                            <h2 class="h2 mb-4">{{ voiture.Titre }}</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h4">Prix:</h3>
+                            <p>{{ voiture.Prix | number_format(0, '', '.') }} €</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h4">Année de circulation:</h3>
+                            <p>{{ voiture.AnneeCirculation }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h4">Kilométrage:</h3>
+                            <p>{{ voiture.Kilometrage | number_format(0, '', '.') }} KM</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h4">Disponibilité:</h3>
+                            <p>Oui</p>
+                        </div>
+                    </div>
+                    {% if is_granted('ROLE_EMPLOYE') %}
+                    <div class="row justify-content-center mt-3">
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <a href="{{ path('app_voiture_edit', {'id': voiture.id}) }}" class="btn btn-primary me-3">
+                                    <i class="fas fa-edit fa-lg"></i>
+                                </a>
+                                <a href="{{ path('app_voiture_delete', {'id': voiture.id}) }}" class="btn btn-danger me-3">
+                                    <i class="fas fa-trash fa-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <div class="mt-4">
+                        <div class="text-center">
+                            <a href="{{ path('app_formulaire_contact', {'id': voiture.id}) }}" class="btn btn-primary">S'informer</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+        </div>
+    </div>
+	{% if is_granted('ROLE_EMPLOYE') %}
+		{% if contacts is not null %}
+			<div class="row mt-5 justify-content-center">
+				<div class="col-md-8">
+					<div class="row">
+						{% for contact in contacts %}
+							<div class="col-lg-4 col-md-6 mb-4">
+								<div class="card border-primary shadow-sm">
+									<div class="card-body">
+										<h5 class="card-title text-center">{{ contact.getNom() }}
+											{{ contact.getPrenom() }}</h5>
+										<p class="card-text text-center">Email:
+											{{ contact.getEmail() }}</p>
+										<p class="card-text text-center">Téléphone:
+											{{ contact.getNumTel() }}</p>
+										<p class="card-text text-center">Message:
+											{{ contact.getMessage() }}</p>
+										<div class="d-flex justify-content-center">
+											<a href="{{ path('delete_formulaire_contact', {'id': contact.id}) }}" class="btn btn-danger">
+												<i class="fas fa-trash fa-lg"></i>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							{% if loop.index % 3 == 0 %}
+							</div>
+							<div class="row">
+							{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		{% endif %}
+	{% endif %}
+
+</div>{% endblock %}

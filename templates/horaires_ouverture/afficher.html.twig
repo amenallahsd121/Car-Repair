@@ -1,0 +1,87 @@
+{% extends is_granted('IS_AUTHENTICATED_FULLY') ? 'basebackoffice.html.twig' : 'base.html.twig' %}
+
+
+{% block title %}Horaires
+{% endblock %}
+
+{% block body %}
+	<style>
+
+		html,
+		body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+
+		.container-xxl {
+			min-height: 100%;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.container {
+			flex: 1;
+		}
+
+
+		.text-under-icon {
+			text-align: center;
+			margin-top: 10px;
+		}
+
+		.center-icon-buttons {
+			display: flex;
+			justify-content: center;
+		}
+	</style>
+
+	<div class="container-xxl mt-4">
+		<div class="container">
+			<h1 class="text-center mb-4">Horaires d'ouverture</h1>
+			<div class="row justify-content-center">
+				<div class="col-md-8">
+					<table class="table">
+						<thead>
+							<tr class="text-center">
+								<th scope="col">Jour</th>
+								<th scope="col">Horaire</th>
+								{% if is_granted('ROLE_ADMIN') %}
+									<th scope="col">Supprimer</th>
+									<th scope="col">Modifier</th>
+								{% endif %}
+							</tr>
+						</thead>
+						<tbody>
+							{% for horaire in horairesOuvertures %}
+								<tr>
+									<td class="text-center">{{ horaire.getJour() }}</td>
+									<td class="text-center">{{ horaire.getHoraire() }}</td>
+									{% if is_granted('ROLE_ADMIN') %}
+										<td>
+											<div class="center-icon-buttons">
+												<a href="{{ path('supprimer_horaires_ouverture', {'id': horaire.getId()}) }}" class="btn btn-danger btn-sm">
+													<i class="fas fa-trash-alt"></i>
+												</a>
+											</div>
+										</td>
+										<td>
+											<div class="center-icon-buttons">
+												<a href="{{ path('modifier_horaires_ouverture', {'id': horaire.getId()}) }}" class="btn btn-primary btn-sm">
+													<i class="fas fa-edit"></i>
+												</a>
+											</div>
+										</td>
+									{% endif %}
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="mt-4">
+				{% include 'staticservicelist.html.twig' %}
+			</div>
+		</div>
+	</div>
+{% endblock %}
